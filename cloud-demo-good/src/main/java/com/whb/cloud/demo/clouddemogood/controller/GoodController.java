@@ -3,7 +3,6 @@ package com.whb.cloud.demo.clouddemogood.controller;
 import com.whb.cloud.demo.clouddemogood.model.GoodModel;
 import com.whb.cloud.demo.clouddemogood.service.GoodService;
 import com.whb.cloud.demo.common.model.ResultVO;
-import com.whb.cloud.demo.common.model.RequestUserInfo;
 import com.whb.cloud.demo.common.util.RequestUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
@@ -12,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -24,7 +22,7 @@ public class GoodController {
 
     @GetMapping
     @ResponseBody
-    @RequiresRoles("ROLE_select")
+    @RequiresRoles("ROLE_SELECT")
     public ResultVO<List<GoodModel>> get(){
         log.info("shiro中的名称:{}",SecurityUtils.getSubject().getPrincipals().asList());
         log.info("request中的用户:{}", RequestUtils.getCurrentRequestUserInfo());
@@ -33,7 +31,7 @@ public class GoodController {
 
     @GetMapping("/{id}")
     @ResponseBody
-    @RequiresRoles("ROLE_select")
+    @RequiresRoles("ROLE_SELECT")
     public ResultVO<GoodModel> get(@PathVariable("id") Integer id){
         return ResultVO.success(goodService.get(id));
     }
@@ -46,7 +44,7 @@ public class GoodController {
 
     @DeleteMapping("/{id}")
     @ResponseBody
-    @RequiresRoles("ROLE_delete")
+    @RequiresRoles("ROLE_DELETE")
     public ResultVO delete(@PathVariable Integer id){
         goodService.delete(id);
         return ResultVO.success();
@@ -54,7 +52,7 @@ public class GoodController {
 
     @PutMapping
     @ResponseBody
-    @RequiresRoles("ROLE_update")
+    @RequiresRoles("ROLE_UPDATE")
     public ResultVO put(@RequestBody GoodModel goodModel){
         goodService.update(goodModel);
         return ResultVO.success(goodModel);

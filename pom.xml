@@ -6,7 +6,7 @@
 
     <groupId>com.whb.cloud.demo</groupId>
     <artifactId>cloud-demo</artifactId>
-    <version>${project.version}</version>
+    <version>1.0-SNAPSHOT</version>
     <modules>
         <module>cloud-demo-common</module>
         <module>cloud-demo-oauth</module>
@@ -14,6 +14,7 @@
         <module>cloud-demo-order</module>
         <module>cloud-demo-good</module>
         <module>cloud-demo-zuul</module>
+        <module>oauth2-bucket</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -69,6 +70,7 @@
                 </configuration>
             </plugin>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
                     <source>1.8</source>

@@ -1,22 +1,15 @@
 package com.whb.cloud.demo.clouddemoorder.controller;
 
-import com.whb.cloud.demo.clouddemoorder.model.GoodModel;
 import com.whb.cloud.demo.clouddemoorder.model.OrderModel;
 import com.whb.cloud.demo.clouddemoorder.service.OrderService;
 import com.whb.cloud.demo.common.model.ResultVO;
-import com.whb.cloud.demo.common.util.RequestUtils;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -33,7 +26,7 @@ public class OrderController {
 
     @GetMapping
     @ResponseBody
-    @RequiresRoles("ROLE_select")
+    @RequiresRoles("ROLE_SELECT")
     public ResultVO<List<OrderModel>> get(){
         ResultVO forObject = restTemplate.getForObject(GOOD_SERVICE_URI + "/goods", ResultVO.class);
         log.info("订单服务获取到的商品信息:{}",forObject);
@@ -42,7 +35,7 @@ public class OrderController {
 
     @GetMapping("/{id}")
     @ResponseBody
-    @RequiresRoles("ROLE_select")
+    @RequiresRoles("ROLE_SELECT")
     public ResultVO<OrderModel> get(@PathVariable("id") Integer id){
         return ResultVO.success(orderService.get(id));
     }
@@ -55,7 +48,7 @@ public class OrderController {
 
     @DeleteMapping("/{id}")
     @ResponseBody
-    @RequiresRoles("ROLE_delete")
+    @RequiresRoles("ROLE_DELETE")
     public ResultVO delete(@PathVariable Integer id){
         orderService.delete(id);
         return ResultVO.success();
@@ -63,7 +56,7 @@ public class OrderController {
 
     @PutMapping
     @ResponseBody
-    @RequiresRoles("ROLE_update")
+    @RequiresRoles("ROLE_UPDATE")
     public ResultVO put(@RequestBody OrderModel orderModel){
         orderService.update(orderModel);
         return ResultVO.success(orderModel);
